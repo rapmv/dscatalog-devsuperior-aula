@@ -13,7 +13,7 @@ import com.devsuperior.dscatalog.entities.Product;
 import com.devsuperior.dscatalog.tests.Factory;
 
 @DataJpaTest
-public class PoductRepositoryTests {
+public class ProductRepositoryTests {
 
 	@Autowired
 	private ProductRepository repository;
@@ -59,4 +59,17 @@ public class PoductRepositoryTests {
 		});
 	}
 	
+	@Test
+	public void findByIdShouldReturnNonEmptyOptionalWhenIdExist() {
+		
+		Optional<Product> result = repository.findById(existingId);
+		Assertions.assertTrue(result.isPresent());
+	}
+	
+	@Test
+	public void findByIdShouldREturnEmptyOptionalWhenIdDoesNotExist() {
+		
+		Optional<Product> result = repository.findById(nonExistingId);
+		Assertions.assertTrue(result.isEmpty());
+	}
 }
